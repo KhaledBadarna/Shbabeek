@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import WeeklyDateSelector from "./WeeklyDateSelector";
-import MessageModal from "./MessageModal";
+import MessageModal from "./modals/MessageModal";
 import { useSelector } from "react-redux";
 import { selectLessons } from "../redux/selectors/lessonsSelectors";
-import LessonCallScreen from "../screens/Student/LessonCallScreen";
+import LessonCallScreen from "../screens/shared/LessonCallScreen";
 import { useNavigation } from "@react-navigation/native";
 const LessonsCard = () => {
   const lessons = useSelector(selectLessons);

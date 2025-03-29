@@ -10,7 +10,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FavoriteIcon from "../../components/FavoriteIcon";
 import ShareTeacherButton from "../../components/ShareTeacherButton";
-import YoutubeIframe from "react-native-youtube-iframe";
+// import YoutubeIframe from "react-native-youtube-iframe";
 
 const TeacherInfoScreen = ({ route, navigation }) => {
   const { teacher, teacherId, topicName } = route.params;
@@ -29,7 +29,7 @@ const TeacherInfoScreen = ({ route, navigation }) => {
         contentContainerStyle={{ paddingBottom: 120 }} // Prevents overlap with the button
       >
         {/* Video Section */}
-        <View style={styles.videoContainer}>
+        {/* <View style={styles.videoContainer}>
           <YoutubeIframe
             height={200}
             videoId="dQw4w9WgXcQ"
@@ -49,7 +49,7 @@ const TeacherInfoScreen = ({ route, navigation }) => {
               />
             </TouchableOpacity>
           )}
-        </View>
+        </View> */}
 
         {/* Teacher Profile */}
         <View style={styles.profileContainer}>
