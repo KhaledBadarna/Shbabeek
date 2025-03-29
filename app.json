@@ -1,0 +1,13 @@
+{
+  "name": "Shbabeek",
+  "displayName": "Shbabeek",
+  "android": {
+    "package": "com.ahmad923.shbabeek"
+  },
+  "ios": {
+    "bundleIdentifier": "com.ahmad923.shbabeek",
+    "newArchEnabled": true
+  },
+  "plugins": ["./plugins/no-google-maps"]
+  
+}
