@@ -67,34 +67,34 @@ const StudentHomeScreen = ({ navigation }) => {
     {
       id: "1",
       name: "رياضيات",
-      image: require("../../../assets/images/math.png"),
+      image: require("../../assets/math.png"),
     },
     {
       id: "2",
       name: "فيزياء",
-      image: require("../../../assets/images/physics.jpg"),
+      image: require("../../assets/physics.jpg"),
     },
     {
       id: "3",
       name: "كيمياء",
-      image: require("../../../assets/images/chemistry.png"),
+      image: require("../../assets/chemistry.png"),
     },
     {
       id: "4",
       name: "أحياء",
-      image: require("../../../assets/images/biology.png"),
+      image: require("../../assets/biology.png"),
     },
     { id: "5", name: "لغة عربية", icon: "star-crescent" },
     {
       id: "6",
       name: "English",
-      image: require("../../../assets/images/english.png"),
+      image: require("../../assets/english.png"),
     },
     { id: "7", name: "עברית", icon: "star-david" },
     {
       id: "8",
       name: "برمجة",
-      image: require("../../../assets/images/programming.png"),
+      image: require("../../assets/programming.png"),
     },
   ];
 
@@ -154,7 +154,7 @@ const StudentHomeScreen = ({ navigation }) => {
                 source={
                   profileImage
                     ? { uri: profileImage }
-                    : require("../../../assets/images/noUserImage.png")
+                    : require("../../assets/noUserImage.png")
                 }
                 style={styles.profileImage}
               />
@@ -183,7 +183,7 @@ const StudentHomeScreen = ({ navigation }) => {
             {favorites.length === 0 && (
               <View style={styles.noFavoritesContainer}>
                 <Image
-                  source={require("../../../assets/noFav.png")}
+                  source={require("../../assets/noFav.png")}
                   style={styles.noFavoritesImage}
                 />
                 <Text style={styles.noFavoritesText}>

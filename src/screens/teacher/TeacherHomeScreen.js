@@ -12,8 +12,8 @@ import {
   doc,
 } from "firebase/firestore";
 import { firestore } from "../../firebase";
-import { setLessons } from "../../redux/slices/lessonSlice"; // ✅ Import Redux action
-import LessonsCard from "../../components/LessonCard";
+import { setLessons } from "../../redux/slices/lessonsSlice"; // ✅ Import Redux action
+import LessonsCard from "../../components/LessonsCard";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Timestamp } from "firebase/firestore";
 const TeacherHomeScreen = () => {
@@ -140,7 +140,7 @@ const TeacherHomeScreen = () => {
             source={
               profileImage
                 ? { uri: profileImage }
-                : require("../../../assets/images/noUserImage.png")
+                : require("../../assets/noUserImage.png")
             }
             style={styles.profileImage}
           />

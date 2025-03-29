@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
-import { WebView } from "react-native-webview";
+// import { WebView } from "react-native-webview";
 
 const LessonCallScreen = ({ route }) => {
   const { roomName, userName } = route.params;
@@ -9,7 +9,7 @@ const LessonCallScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <WebView
+      {/* <WebView
         source={{ uri: jitsiURL }}
         style={{ flex: 1 }}
         originWhitelist={["*"]}
@@ -31,7 +31,7 @@ const LessonCallScreen = ({ route }) => {
             ? "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36"
             : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
         }
-      />
+      /> */}
     </View>
   );
 };

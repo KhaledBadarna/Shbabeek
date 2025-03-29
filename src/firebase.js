@@ -39,13 +39,4 @@ onMessage(messaging, (payload) => {
 });
 
 // ✅ Ensure `requestFCMToken` is NOT duplicated in the export
-export {
-  auth,
-  firestore,
-  realTimeDb,
-  messaging,
-  doc,
-  setDoc,
-  getDoc,
-  requestFCMToken,
-};
+export { auth, firestore, realTimeDb, messaging, doc, setDoc, getDoc };

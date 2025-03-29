@@ -1,5 +1,5 @@
 import { collection, getDocs, getDoc, doc } from "firebase/firestore";
-import { firestore } from "../../firebase";
+import { firestore } from "../firebase";
 import { setLessons } from "../slices/lessonSlice";
 import { Timestamp } from "firebase/firestore";
 

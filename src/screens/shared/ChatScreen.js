@@ -13,7 +13,7 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase";
 import {
   collection,
   addDoc,

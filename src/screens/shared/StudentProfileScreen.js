@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-} from 'react-native';
+} from "react-native";
 
-import {useDispatch, useSelector} from 'react-redux';
-import {logout, setUserInfo} from '../../redux/slices/userSlice';
-import {resetFavorites} from '../../redux/slices/favoritesSlice';
-import {useNavigation} from '@react-navigation/native';
-import {firestore} from '../../firebase';
+import { useDispatch, useSelector } from "react-redux";
+import { logout, setUserInfo } from "../../redux/slices/userSlice";
+import { resetFavorites } from "../../redux/slices/favoritesSlice";
+import { useNavigation } from "@react-navigation/native";
+import { firestore } from "../../firebase";
 import {
   doc,
   updateDoc,
@@ -20,30 +20,30 @@ import {
   query,
   where,
   getDocs,
-} from 'firebase/firestore';
-import AuthModal from '../../components/AuthModal';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ProfitsScreen from '../teacher/ProfitsScreen';
-import {launchImageLibrary} from 'react-native-image-picker';
+} from "firebase/firestore";
+import AuthModal from "../../components/modals/AuthModal";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import ProfitsScreen from "../teacher/ProfitsScreen";
+import { launchImageLibrary } from "react-native-image-picker";
 
 const StudentProfileScreen = () => {
-  const image = useSelector(state => state.user.profileImage);
+  const image = useSelector((state) => state.user.profileImage);
   const [profileImage, setProfileImage] = useState(image);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [modalMode, setModalMode] = useState('');
+  const [modalMode, setModalMode] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const {name, phone, userId, userType} = useSelector(state => state.user);
+  const { name, phone, userId, userType } = useSelector((state) => state.user);
 
   const handleLogout = () => {
     dispatch(resetFavorites()); // ✅ Clear favorites on logout
     dispatch(logout());
-    navigation.navigate('الرئيسية');
+    navigation.navigate("الرئيسية");
   };
   const pickImage = async () => {
     try {
       const result = await launchImageLibrary({
-        mediaType: 'photo',
+        mediaType: "photo",
         includeBase64: false,
         maxHeight: 800,
         maxWidth: 800,
@@ -52,7 +52,7 @@ const StudentProfileScreen = () => {
       });
 
       if (result.didCancel) {
-        console.warn('⚠️ Image selection was canceled.');
+        console.warn("⚠️ Image selection was canceled.");
         return;
       }
 
@@ -60,7 +60,7 @@ const StudentProfileScreen = () => {
 
       // Optional file size check (not always provided)
       if (selectedImage.fileSize && selectedImage.fileSize > 5 * 1024 * 1024) {
-        Alert.alert('⚠️ Image Too Large', 'Please select an image under 5MB.');
+        Alert.alert("⚠️ Image Too Large", "Please select an image under 5MB.");
         return;
       }
 
@@ -68,81 +68,81 @@ const StudentProfileScreen = () => {
       setProfileImage(uri);
       handleImageUpload(uri);
     } catch (error) {
-      console.error('❌ Error picking image:', error);
+      console.error("❌ Error picking image:", error);
     }
   };
-  const handleImageUpload = async imageUri => {
+  const handleImageUpload = async (imageUri) => {
     if (!imageUri) return;
 
     // ✅ Step 1: Update Redux Immediately for Instant UI Update
-    dispatch(setUserInfo({profileImage: imageUri}));
+    dispatch(setUserInfo({ profileImage: imageUri }));
 
     let data = new FormData();
-    data.append('file', {
+    data.append("file", {
       uri: imageUri,
-      type: 'image/jpeg',
-      name: 'profile.jpg',
+      type: "image/jpeg",
+      name: "profile.jpg",
     });
-    data.append('upload_preset', 'profile_upload');
-    data.append('cloud_name', 'dmewlyit3');
+    data.append("upload_preset", "profile_upload");
+    data.append("cloud_name", "dmewlyit3");
 
     try {
       let res = await fetch(
-        'https://api.cloudinary.com/v1_1/dmewlyit3/image/upload',
+        "https://api.cloudinary.com/v1_1/dmewlyit3/image/upload",
         {
-          method: 'POST',
+          method: "POST",
           body: data,
-        },
+        }
       );
 
       let json = await res.json();
       const imageUrl = json.secure_url;
 
       if (!imageUrl) {
-        console.error('❌ Error: No image URL returned from Cloudinary.');
+        console.error("❌ Error: No image URL returned from Cloudinary.");
         return;
       }
 
       // ✅ Step 2: Update Firestore in Background
-      const collectionName = userType === 'teacher' ? 'teachers' : 'students';
+      const collectionName = userType === "teacher" ? "teachers" : "students";
       const userDocRef = doc(firestore, collectionName, userId);
-      await updateDoc(userDocRef, {profileImage: imageUrl});
+      await updateDoc(userDocRef, { profileImage: imageUrl });
 
       // ✅ Step 3: Update Redux with Cloudinary URL (in case of format change)
-      dispatch(setUserInfo({profileImage: imageUrl}));
+      dispatch(setUserInfo({ profileImage: imageUrl }));
 
-      console.log('✅ Image updated successfully in Firestore & Redux!');
+      console.log("✅ Image updated successfully in Firestore & Redux!");
     } catch (error) {
-      console.error('🔥 Error uploading image:', error);
+      console.error("🔥 Error uploading image:", error);
     }
   };
 
-  const updatePhoneNumber = async newPhone => {
-    console.log('📞 Checking if phone number exists:', newPhone);
+  const updatePhoneNumber = async (newPhone) => {
+    console.log("📞 Checking if phone number exists:", newPhone);
 
     if (!userId) {
-      console.error('🚨 Error: User ID is missing.');
+      console.error("🚨 Error: User ID is missing.");
       return;
     }
 
     try {
-      const collectionName = userType === 'teacher' ? 'teachers' : 'students';
+      const collectionName = userType === "teacher" ? "teachers" : "students";
 
       // ✅ Step 1: Check if the phone number already exists
       const usersCollectionRef = collection(firestore, collectionName);
-      const q = query(usersCollectionRef, where('phone', '==', newPhone));
+      const q = query(usersCollectionRef, where("phone", "==", newPhone));
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        console.log('⚠️ Phone number already exists!'); // 🔥 Changed from console.error() to console.log()
-        alert('⚠️ رقم الهاتف مستخدم بالفعل. الرجاء استخدام رقم آخر.');
+        console.log("⚠️ Phone number already exists!"); // 🔥 Changed from console.error() to console.log()
+        alert("⚠️ رقم الهاتف مستخدم بالفعل. الرجاء استخدام رقم آخر.");
         return; // ❌ Stop the update if phone already exists
       }
 
       // ✅ Step 2: Proceed with updating Firestore
-      console.log('✅ Phone number is unique. Updating Firestore...');
+      console.log("✅ Phone number is unique. Updating Firestore...");
       const userDocRef = doc(firestore, collectionName, userId);
-      await updateDoc(userDocRef, {phone: newPhone});
+      await updateDoc(userDocRef, { phone: newPhone });
 
       // ✅ Step 3: Update Redux without removing other user data
       dispatch(
@@ -153,12 +153,12 @@ const StudentProfileScreen = () => {
           userId,
           userType,
           isLoggedIn: true,
-        }),
+        })
       );
 
-      console.log('✅ Phone updated successfully!');
+      console.log("✅ Phone updated successfully!");
     } catch (error) {
-      console.error('🔥 Error updating phone:', error);
+      console.error("🔥 Error updating phone:", error);
     }
   };
 
@@ -171,7 +171,7 @@ const StudentProfileScreen = () => {
       <View style={styles.profileContainer}>
         <View style={styles.profileImageContainer}>
           {profileImage ? (
-            <Image source={{uri: profileImage}} style={styles.profileImage} />
+            <Image source={{ uri: profileImage }} style={styles.profileImage} />
           ) : (
             <Icon name="person-circle-outline" size={100} color="#555" />
           )}
@@ -183,34 +183,38 @@ const StudentProfileScreen = () => {
         </View>
         <Text style={styles.profileName}>{name}</Text>
         <Text style={styles.phoneNumber}>
-          {phone ? phone.replace(/^(\d{3})(\d{4})(\d{3})$/, '$1-$2-$3') : ''}
+          {phone ? phone.replace(/^(\d{3})(\d{4})(\d{3})$/, "$1-$2-$3") : ""}
         </Text>
       </View>
-      {userType === 'teacher' && (
+      {userType === "teacher" && (
         <View style={styles.teachersBtnContainer}>
           <TouchableOpacity
             style={styles.teachersButton}
-            onPress={() => navigation.navigate('ProfitsScreen')}>
+            onPress={() => navigation.navigate("ProfitsScreen")}
+          >
             <Icon name="finance" size={24} color="#031417" />
             <Text
               style={{
-                color: '#031417',
-                fontWeight: 'bold',
-                fontFamily: 'Cairo',
-              }}>
+                color: "#031417",
+                fontWeight: "bold",
+                fontFamily: "Cairo",
+              }}
+            >
               ارباحي
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.teachersButton, {backgroundColor: '#b0edf7'}]}
-            onPress={() => navigation.navigate('TeacherSettingsScreen')}>
+            style={[styles.teachersButton, { backgroundColor: "#b0edf7" }]}
+            onPress={() => navigation.navigate("TeacherSettingsScreen")}
+          >
             <Icon name="badge-account-horizontal" size={24} color="#031417" />
             <Text
               style={{
-                color: '#031417',
-                fontWeight: 'bold',
-                fontFamily: 'Cairo',
-              }}>
+                color: "#031417",
+                fontWeight: "bold",
+                fontFamily: "Cairo",
+              }}
+            >
               التفاصيل الشخصية
             </Text>
           </TouchableOpacity>
@@ -220,9 +224,10 @@ const StudentProfileScreen = () => {
         <TouchableOpacity
           style={styles.optionRow}
           onPress={() => {
-            setModalMode('updateName');
+            setModalMode("updateName");
             setShowAuthModal(true);
-          }}>
+          }}
+        >
           <Icon name="pencil" size={24} color="#555" />
           <Text style={styles.optionText}>تغيير الاسم</Text>
         </TouchableOpacity>
@@ -230,9 +235,10 @@ const StudentProfileScreen = () => {
         <TouchableOpacity
           style={styles.optionRow}
           onPress={() => {
-            setModalMode('updatePhone');
+            setModalMode("updatePhone");
             setShowAuthModal(true);
-          }}>
+          }}
+        >
           <Icon name="phone-plus" size={24} color="#555" />
           <Text style={styles.optionText}>تغيير رقم الهاتف</Text>
         </TouchableOpacity>
@@ -249,7 +255,7 @@ const StudentProfileScreen = () => {
 
         <TouchableOpacity onPress={handleLogout} style={styles.optionRow}>
           <Icon name="logout" size={24} color="#DF3F5E" />
-          <Text style={[styles.optionText, {color: '#DF3F5E'}]}>
+          <Text style={[styles.optionText, { color: "#DF3F5E" }]}>
             تسجيل الخروج
           </Text>
         </TouchableOpacity>
@@ -259,7 +265,7 @@ const StudentProfileScreen = () => {
         visible={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         mode={modalMode}
-        onConfirm={modalMode === 'updatePhone' ? updatePhoneNumber : null} // ❌ No need for updateUserName
+        onConfirm={modalMode === "updatePhone" ? updatePhoneNumber : null} // ❌ No need for updateUserName
         userId={userId}
         userType={userType}
         profileImage={profileImage}
@@ -271,88 +277,88 @@ const StudentProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: "#f7f7f7",
     padding: 10,
   },
   profileContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     padding: 10,
   },
   profileImageContainer: {
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "relative",
+    justifyContent: "center",
+    alignItems: "center",
   },
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 50, // Make the image circular
-    backgroundColor: '#ddd', // Placeholder background
+    backgroundColor: "#ddd", // Placeholder background
     borderWidth: 2,
-    borderColor: '#00e5ff',
+    borderColor: "#00e5ff",
   },
   cameraIcon: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     right: 5,
-    backgroundColor: '#00e5ff',
+    backgroundColor: "#00e5ff",
     borderRadius: 20,
     padding: 5,
   },
   profileName: {
     fontSize: 20,
-    fontWeight: 'semibold',
+    fontWeight: "semibold",
     marginTop: 10,
-    fontFamily: 'Cairo',
+    fontFamily: "Cairo",
   },
   phoneNumber: {
     fontSize: 16,
-    color: '#727272',
-    fontFamily: 'Cairo',
+    color: "#727272",
+    fontFamily: "Cairo",
   },
   optionsContainer: {
     padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
     paddingTop: 10,
     borderRadius: 10,
     paddingBottom: 130,
     marginTop: 10,
   },
   optionRow: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: "#eee",
   },
   optionText: {
     fontSize: 13,
-    color: '#555',
+    color: "#555",
     marginRight: 10,
     flex: 1,
-    textAlign: 'right',
-    fontFamily: 'Cairo',
+    textAlign: "right",
+    fontFamily: "Cairo",
   },
-  icons: {backgroundColor: '#ebebeb', borderRadius: 10, padding: 5},
+  icons: { backgroundColor: "#ebebeb", borderRadius: 10, padding: 5 },
   teachersButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 5,
     padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#cff7b0',
-    width: '48%',
+    alignItems: "center",
+    backgroundColor: "#cff7b0",
+    width: "48%",
   },
   teachersBtnContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,
     marginTop: 10,
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
   },
 });
 

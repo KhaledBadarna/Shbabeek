@@ -8,10 +8,10 @@ import {
   StyleSheet,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserInfo } from "../redux/slices/userSlice";
-import { setTeacherData } from "../redux/slices/teacherSlice";
-import { setFavorites } from "../redux/slices/favoritesSlice";
-import { firestore } from "../firebase";
+import { setUserInfo } from "../../redux/slices/userSlice";
+import { setTeacherData } from "../../redux/slices/teacherSlice";
+import { setFavorites } from "../../redux/slices/favoritesSlice";
+import { firestore } from "../../firebase";
 import {
   collection,
   query,
@@ -23,8 +23,8 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
-import { registerForPushNotificationsAsync } from "../redux/utils/pushNotification";
-import fetchLessons from "../redux/utils/fetchLessons";
+import { registerForPushNotificationsAsync } from "../../utils/notifications/registerForPushNotifications";
+import fetchLessons from "../../utils/fetchLessons";
 const AuthModal = ({ visible, onClose, mode = "auth", onConfirm }) => {
   const dispatch = useDispatch();
   const [step, setStep] = useState("register");

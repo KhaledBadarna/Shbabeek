@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Image,
 } from "react-native";
-import { firestore } from "../firebase";
+import { firestore } from "../../firebase";
 import {
   collection,
   query,

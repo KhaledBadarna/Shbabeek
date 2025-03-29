@@ -11,7 +11,7 @@ import {
   arrayRemove,
 } from "firebase/firestore";
 import { firestore } from "../firebase";
-import AuthModal from "../components/AuthModal"; // ✅ Use AuthModal instead of two modals
+import AuthModal from "./modals/AuthModal"; // ✅ Use AuthModal instead of two modals
 
 const FavoriteIcon = ({ teacherId }) => {
   const { isLoggedIn, userId } = useSelector((state) => state.user);
