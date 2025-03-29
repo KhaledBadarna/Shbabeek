@@ -1,6 +1,6 @@
 import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase";
-import { setLessons } from "../slices/lessonSlice";
+import { setLessons } from "../redux/slices/lessonsSlice";
 import { Timestamp } from "firebase/firestore";
 
 const fetchLessons = async (userId, userRole, dispatch) => {

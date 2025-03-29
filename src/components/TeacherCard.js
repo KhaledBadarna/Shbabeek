@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import FavoriteIcon from "../components/FavoriteIcon"; // Import the FavoriteIcon component
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import AuthModal from "./AuthModal";
+import AuthModal from "./modals/AuthModal";
 
 const TeacherCard = ({
   name,
