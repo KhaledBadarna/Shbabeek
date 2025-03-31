@@ -16,7 +16,6 @@ import BankDetailsScreen from "./src/screens/teacher/BankDetailsScreen";
 import TeacherSettingsScreen from "./src/screens/teacher/TeacherSettingsScreen";
 import ProfitsScreen from "./src/screens/teacher/ProfitsScreen";
 import LessonCallScreen from "./src/screens/shared/LessonCallScreen";
-import * as Notifications from "expo-notifications";
 
 //#DF3F5E
 const Stack = createStackNavigator();
@@ -33,14 +32,6 @@ const linking = {
 
 export default function App() {
   // UseEffect hook to handle push notifications registration
-
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: true,
-      shouldSetBadge: false,
-    }),
-  });
 
   return (
     <Provider store={store}>

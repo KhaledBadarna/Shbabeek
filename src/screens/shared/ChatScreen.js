@@ -12,7 +12,7 @@ import {
   Keyboard,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { firestore } from "../../firebase";
 import {
   collection,
@@ -232,7 +232,7 @@ const ChatScreen = ({ navigation, route }) => {
               onSubmitEditing={sendMessage}
             />
             <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-              <Ionicons name="send" size={24} color="white" />
+              <Icon name="send" size={24} color="white" />
             </TouchableOpacity>
           </View>
         </View>

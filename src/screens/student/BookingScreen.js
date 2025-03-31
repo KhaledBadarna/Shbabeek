@@ -7,7 +7,6 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import DocumentPicker from "react-native-document-picker";
 import { handleBooking } from "../redux/utils/booking";
 import { useSelector, useDispatch } from "react-redux";
@@ -95,7 +94,7 @@ const BookingScreen = ({ route }) => {
       >
         {showSuccessMessage ? (
           <View style={styles.successMessageContainer}>
-            <Ionicons name="checkmark-circle" size={50} color="#009dff" />
+            <Icon name="checkmark-circle" size={50} color="#009dff" />
             <Text style={styles.successMessageText}>
               تم حجز الدرس بنجاح! الرجاء انتظار موافقة المعلم على الطلب
             </Text>
@@ -325,7 +324,7 @@ const BookingScreen = ({ route }) => {
                 onPress={handleAttachFile}
                 style={styles.attachFileButton}
               >
-                <Ionicons name="attach" size={24} color="#00adf0" />
+                <Icon name="attachment" size={24} color="#00adf0" />
                 <Text style={styles.attachFileText}>
                   {fileAttached
                     ? `ملف مرفق: ${fileAttached.name}`

@@ -7,7 +7,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const MessageModal = ({ lessonMessage, modalVisible, onClose }) => {
   const message = lessonMessage; // Simplified to directly access the first message
@@ -22,7 +22,7 @@ const MessageModal = ({ lessonMessage, modalVisible, onClose }) => {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-            <Ionicons name="close-circle-outline" size={30} color="#031417" />
+            <Icon name="close-circle-outline" size={30} color="#031417" />
           </TouchableOpacity>
 
           {/* Scrollable content in the modal */}
@@ -37,7 +37,7 @@ const MessageModal = ({ lessonMessage, modalVisible, onClose }) => {
                     /* Handle file download here */
                   }}
                 >
-                  <Ionicons name="cloud-download" size={24} color="#fff" />
+                  <Icon name="cloud-download" size={24} color="#fff" />
                   <Text style={styles.fileText}>تحميل الملف</Text>
                 </TouchableOpacity>
               </View>

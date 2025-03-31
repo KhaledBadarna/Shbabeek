@@ -101,7 +101,7 @@ const PaymentMethodModal = ({ visible, setOpenPaymentMethod }) => {
               ]}
               onPress={() => handlePaymentSelection("GooglePay")}
             >
-              <Ionicons name="logo-google" size={30} color="#4285F4" />
+              <Icon name="google" size={30} color="#4285F4" />
               <Text style={styles.paymentText}>Google Pay</Text>
             </TouchableOpacity>
           )}
