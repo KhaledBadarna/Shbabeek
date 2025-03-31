@@ -86,9 +86,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.ahmad923.shbabeek'
+    namespace 'com.khaled.shbabeek'
     defaultConfig {
-        applicationId 'com.ahmad923.shbabeek'
+        applicationId 'com.khaled.shbabeek'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

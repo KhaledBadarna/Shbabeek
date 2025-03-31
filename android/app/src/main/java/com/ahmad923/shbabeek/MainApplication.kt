@@ -1,4 +1,4 @@
-package com.ahmad923.shbabeek
+package com.khaled.shbabeek
 
 import android.app.Application
 import android.content.res.Configuration

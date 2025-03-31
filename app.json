@@ -1,18 +1,8 @@
 {
-  "name": "Shbabeek",
-  "displayName": "Shbabeek",
-  "android": {
-    "package": "com.ahmad923.shbabeek"
-  },
-  "ios": {
-    "bundleIdentifier": "com.ahmad923.shbabeek",
-    "newArchEnabled": true
-  },
-  "plugins": ["./plugins/no-google-maps"],
-  "expo": {
-  "notification": {
-    "icon": "./src/assets/noUserImage.png",
-    "color": "#00e5ff"
+    "expo": {
+      "name": "Shbabeek",
+      "slug": "shbabeek",
+      "version": "1.0.0",
+      "sdkVersion": "50.0.0"
+    }
   }
-}
-}
