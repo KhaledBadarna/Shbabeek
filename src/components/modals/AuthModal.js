@@ -23,6 +23,7 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
+
 import { registerForPushNotificationsAsync } from "../../utils/notifications/registerForPushNotifications";
 import fetchLessons from "../../utils/fetchLessons";
 const AuthModal = ({ visible, onClose, mode = "auth", onConfirm }) => {

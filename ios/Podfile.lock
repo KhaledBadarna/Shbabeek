@@ -1572,6 +1572,11 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNNotifee (9.1.8):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 9.1.8)
+  - RNNotifee/NotifeeCore (9.1.8):
+    - React-Core
   - RNScreens (4.10.0):
     - DoubleConversion
     - glog
@@ -1711,6 +1716,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -1861,6 +1867,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/checkbox"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNShare:
@@ -1941,12 +1949,13 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: b6410dead2732b5c72a7fdb1ecb5651bbcf4674b
   RNCCheckbox: 450ce156f3e29e25efa0315c96cfbabe5a39ded1
   RNGestureHandler: 667fcafe32933456d8851e0a96932d2d2b34411a
+  RNNotifee: 5e3b271e8ea7456a36eec994085543c9adca9168
   RNScreens: 578cbc135e908cfc3e4739ce12a42fdb1d798ca6
   RNShare: 381ed02f6c0dc42b8c24bb5a1e5df0ee5fd91354
   RNVectorIcons: 182892e7d1a2f27b52d3c627eca5d2665a22ee28
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 06fc4b2c3664ae0e278964b8fbcb0ee9d21f0a5a
 
-PODFILE CHECKSUM: 5bb8525814d53172cd3bcc22ac775beef3fe113f
+PODFILE CHECKSUM: 4e95480b1309d27c43e96537a9fb6895b42cdbbe
 
 COCOAPODS: 1.16.2

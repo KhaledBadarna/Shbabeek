@@ -16,7 +16,7 @@ import BankDetailsScreen from "./src/screens/teacher/BankDetailsScreen";
 import TeacherSettingsScreen from "./src/screens/teacher/TeacherSettingsScreen";
 import ProfitsScreen from "./src/screens/teacher/ProfitsScreen";
 import LessonCallScreen from "./src/screens/shared/LessonCallScreen";
-
+import notifee from "@notifee/react-native";
 //#DF3F5E
 const Stack = createStackNavigator();
 import ChatScreen from "./src/screens/shared/ChatScreen";
@@ -33,6 +33,15 @@ const linking = {
 export default function App() {
   // UseEffect hook to handle push notifications registration
 
+  useEffect(() => {
+    const setup = async () => {
+      await notifee.createChannel({
+        id: "default",
+        name: "Default Channel",
+      });
+    };
+    setup();
+  }, []);
   return (
     <Provider store={store}>
       <NavigationContainer linking={linking}>

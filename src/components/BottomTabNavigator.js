@@ -10,6 +10,7 @@ import { StatusBar } from "react-native";
 import AuthModal from "../components/modals/AuthModal";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 import { View, Text, StyleSheet } from "react-native";
 import {
   collection,
